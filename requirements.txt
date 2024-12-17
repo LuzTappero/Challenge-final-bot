@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+cohere
+langchain
+pdfplumber
+chromadb
+langchain-chroma>=0.1.2
+langchain-cohere
