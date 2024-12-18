@@ -19,11 +19,12 @@ def process_file(file_path: str) -> None:
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             content = file.read()
+            file_title = file.name.split("/")[-1].split(".")[0]  # Lee el título del documento
     except (UnicodeDecodeError, OSError) as e:
         print(f"Error reading file {file_path}: {e}")
         return
 
-    chunks = create_chunks(content)
+    chunks = create_chunks(content, file_title, category="Medicamentos Cardiovasculares ")
     if not chunks:
         print(f"File {file_path} did not produce valid chunks.")
         return

@@ -37,12 +37,13 @@ def get_embedding(chunks):
                 embedding_types=["float"]
             )
             # Verify if embeddings were returned
-            if not embedding_response.embeddings:
+            if not embedding_response or not hasattr(embedding_response, 'embeddings') or not   embedding_response.embeddings:
                 print(f"No embeddings were returned for chunk {chunk_id}.")
                 continue
+
             embeddings = embedding_response.embeddings.float_
             # Add embeddings to the list
-            all_embeddings.extend(embeddings)
+            all_embeddings.append((chunk_id, embeddings))
 
         # Add embeddings to Chroma
         add_embeddings_to_chroma(all_embeddings, chunks)

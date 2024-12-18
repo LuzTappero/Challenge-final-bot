@@ -3,7 +3,7 @@ from langchain_core.documents import Document
 from langchain_cohere import CohereEmbeddings
 
 #Crear un cliente persistente en chroma
-persistent_directory ="../med_collect_chroma"
+persistent_directory ="../MedicaBOTChromadb"
 collection_name = "medications_collection"
 embeddings_function = CohereEmbeddings(model="embed-multilingual-v3.0")
 
