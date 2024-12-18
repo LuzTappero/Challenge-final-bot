@@ -3,7 +3,7 @@ from langchain_core.documents import Document
 from config.chromadb_config import chroma_config
 
 vector_store = chroma_config()
-documents = vector_store.get()
+
 
 def add_embeddings_to_chroma(embeddings, chunks):
     """

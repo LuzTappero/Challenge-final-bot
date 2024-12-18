@@ -23,6 +23,5 @@ if total_caracteres >= umbral:
 else:
     print(f"No alcanzaste el umbral. Faltan {umbral - total_caracteres} caracteres.")
 
-
 #print(total_caracteres)
 #Cantidad total de caracteres en los textos: 136409 ¡Superaste el umbral de 100000 caracteres! 🚀136409
