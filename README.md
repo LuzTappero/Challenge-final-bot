@@ -321,7 +321,6 @@ El documento más relevante se obtuvo del archivo'BEMPLAS- Clorhidrato de Clonid
 
 - Respuesta:
         - Uso en pediatría: La seguridad y eficacia de la clortalidona y la clonidina no han sido establecidas en menores de 12 años.
-
         - Uso en geriatría: La eliminación de la clortalidona es menor en pacientes ancianos en comparación con adultos jóvenes sanos. Por lo tanto, se recomienda un cuidadoso seguimiento clínico e incluso una reducción de la dosis en algunos casos en que se trate a pacientes ancianos.
 
 - Metadata de la respuesta:
@@ -333,8 +332,7 @@ El documento más relevante se obtuvo del archivo'BEMPLAS- Clorhidrato de Clonid
         ¿Que es el Cardilipen bisoprolol fumarato?
 
 - Respuesta:
-        El Cardilipen bisoprolol fumarato es un medicamento autorizado por el Ministerio de Salud y su venta es bajo receta. Es un betabloqueante selectivo utilizado para el tratamiento de la hipertensión arterial, la prevención de las crisis de angina de pecho y el tratamiento de la insuficiencia cardíaca crónica estable moderada a severa.
-        Su fórmula contiene bisoprolol fumarato en diferentes concentraciones (2,5 mg, 5 mg y 10 mg) y excipientes como celulosa microcristalina, almidón pregelatinizado, hidroxipropilcelulosa, dióxido de silicio coloidal, crospovidona, estearato de magnesio, hidroxipropilmetilcelulosa, polietilenglicol 6000, dióxido de titanio, talco y povidona K30.
+        El Cardilipen bisoprolol fumarato es un medicamento autorizado por el Ministerio de Salud y su venta es bajo receta. Es un betabloqueante selectivo utilizado para el tratamiento de la hipertensión arterial, la prevención de las crisis de angina de pecho y el tratamiento de la insuficiencia cardíaca crónica estable moderada a severa. Su fórmula contiene bisoprolol fumarato en diferentes concentraciones (2,5 mg, 5 mg y 10 mg) y excipientes como celulosa microcristalina, almidón pregelatinizado, hidroxipropilcelulosa, dióxido de silicio coloidal, crospovidona, estearato de magnesio, hidroxipropilmetilcelulosa, polietilenglicol 6000, dióxido de titanio, talco y povidona K30.
 
 - Metadata de la respuesta:
         El documento más relevante se obtuvo del archivo'CARDILIPEN-Bisoprolol fumarato', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 1.00
