@@ -125,11 +125,11 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 
     Optimización de la búsqueda: La utilización de este enfoque reduce el número de documentos que pasan por el proceso de análisis detallado, mejorando la velocidad y eficiencia del sistema. De este modo, se optimiza el tiempo de procesamiento al centrarse solo en los documentos más relevantes.
 
-Flujo de funcionamiento:
+- Flujo de funcionamiento:
 
-base_retriever: Realiza la búsqueda inicial en el vector store utilizando el método .as_retriever().
-base_compressor: Aplica el modelo de reranking de Cohere para reorganizar y asignar relevancia a los resultados obtenidos.
-compression_threshold: Filtra los documentos eliminando aquellos con un puntaje de relevancia inferior a 0.5, garantizando que solo los documentos más relevantes sean considerados.
+      - base_retriever: Realiza la búsqueda inicial en el vector store utilizando el método .as_retriever().
+      - base_compressor: Aplica el modelo de reranking de Cohere para reorganizar y asignar relevancia a los resultados obtenidos.
+      - compression_threshold: Filtra los documentos eliminando aquellos con un puntaje de relevancia inferior a 0.5, garantizando que solo los documentos más relevantes sean considerados.
 
 * Método invoke para la ejecución de la consulta:
 
