@@ -62,13 +62,13 @@ Librerias y herramientas:
      -Generación de embeddings: Crea representaciones vectoriales de los fragmentos.
      - Almacenamiento en Chroma: Guarda los embeddings generados en la base de datos vectorial.
 
-      Ejemplo de ejecución
-      file_path = './output/CARDILIPEN-Bisoprolol fumarato.txt'
-      process_file(file_path)
+         Ejemplo de ejecución
+         file_path = './output/CARDILIPEN-Bisoprolol fumarato.txt'
+         process_file(file_path)
 
-      Mensaje de salida
-      print(f"Documents added to Chroma with IDs: {ids} and embeddings: {len(embeddings)} embedding info {embeddings[0]}")
-   
+         Mensaje de salida
+         "Documents added to Chroma with IDs: {ids} and embeddings: {len(embeddings)} embedding info {embeddings[0]}"
+      
 
 ## Herramientas utilizadas
 
