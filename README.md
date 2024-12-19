@@ -96,6 +96,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 - Razón de elección:
     Este modelo fue seleccionado debido a su capacidad multilingüe, esencial para procesar prospectos médicos en diferentes idiomas (importante para escalabilidad del proyecto, por más que actualmente solo procese documentos en español)
     Ofrece representaciones vectoriales de alta calidad, optimizadas para tareas como búsqueda semántica y clasificación.
+  
 -Beneficio clave:
     Su diseño lo hace ideal para dominios técnicos, garantizando que conceptos médicos complejos se representen con precisión en el espacio vectorial.
 
@@ -106,6 +107,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
     Chroma fue seleccionada por su capacidad de almacenar embeddings de manera persistente, asegurando que los datos procesados no se pierdan tras reinicios del sistema.
     Su rendimiento en búsquedas vectoriales es óptimo para escenarios de consulta rápida y frecuente.
     Es sencilla de instalar y ejecutar, lo que permite integrarla fácilmente al flujo de trabajo de desarrollo.
+  
 - Beneficio clave:
     Permite manejar grandes volúmenes de datos vectoriales con búsquedas eficientes y escalabilidad.
     Inicialmente, los datos se almacenan en un directorio local en la computadora, lo que facilita la configuración en entornos de desarrollo o pruebas.
