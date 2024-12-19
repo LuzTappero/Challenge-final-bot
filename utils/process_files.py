@@ -1,18 +1,6 @@
 import os
-from services.doc_embedding import get_embedding
-from utils.chunks import create_chunks
-
-def process_file_in_folder(folder_path: str) -> None:
-    """Process all files and generate embeddings from its content."""
-    if not os.path.isdir(folder_path):
-        print(f"{folder_path} is not a directory.")
-        return
-
-    for file_name in os.listdir(folder_path):
-        if file_name.endswith(".txt"):
-            file_path = os.path.join(folder_path, file_name)
-            process_file(file_path)
-
+from services.get_docs_embedding import get_embedding
+from utils.create_chunks import create_chunks
 
 def process_file(file_path: str) -> None:
     """Process a file and generate embeddings from its content."""
@@ -23,17 +11,18 @@ def process_file(file_path: str) -> None:
     except (UnicodeDecodeError, OSError) as e:
         print(f"Error reading file {file_path}: {e}")
         return
-
-    chunks = create_chunks(content, file_title, category="Medicamentos Cardiovasculares ")
+    # Process the file and generate chunks
+    chunks = create_chunks(content, file_title, category="Medicamentos Cardiovasculares")
     if not chunks:
         print(f"File {file_path} did not produce valid chunks.")
         return
+    # Generate embeddings
     embeddings = get_embedding(chunks)
     if embeddings:
         print(f"Embeddings generated for file: {file_path}")
 
 
-#Ejemplo de ejecución
+# Example usage
 
 # file_path = './output/CARDILIPEN-Bisoprolol fumarato.txt'
 # process_file(file_path)

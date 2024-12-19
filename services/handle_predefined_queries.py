@@ -13,7 +13,6 @@ def handle_predefined_queries(query_text):
     Returns:
     - str: The predefined response if the query text matches a predefined query, None otherwise.
     """
-    print("entrando a handle predefined")
     tokens = word_tokenize(query_text.lower())
     # Check if the query text contains a greeting
     if any(token in ["hola", "buenas", "qué tal", "saludos"] for token in tokens):

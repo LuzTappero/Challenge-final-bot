@@ -4,18 +4,16 @@ from datetime import datetime
 
 def create_chunks(text,document_name=str, category=str):
     """
-    Divide un texto en chunks con metadata adicional.
+    Split a text into chunks using RecursiveCharacterTextSplitter.
 
     Parameters:
-    - text (str): El texto que se va a dividir.
-    - chunk_size (int): Tamaño máximo de cada chunk.
-    - chunk_overlap (int): Cantidad de texto que se solapa entre chunks.
-    - document_name (str): Nombre del documento original.
-    - creation_date (str): Fecha de creación del documento (formato: YYYY-MM-DD).
-    - category (str): Categoría asociada al contenido del documento.
+    - text (str): text to split into chunks.
+    - document_name (str): Original name of the document.
+    - creation_date (str): Creation date of the document's chunk (format: YYYY-MM-DD).
+    - category (str): Category of the document.
 
     Returns:
-    - list: Lista de diccionarios con chunks y su metadata.
+    - list: Dictionary of chunks with chunk_id, chunk_text, chunk_number, document_name, creation_date and category.
     """
     if not text or not isinstance(text, str):
         print("Invalid text input.")

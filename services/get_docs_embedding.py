@@ -21,7 +21,8 @@ def get_embedding(chunks):
         print("No chunks provided to generate embeddings.")
         return
     try:
-        all_embeddings = []  # List to store all embeddings
+        # List to store all embeddings
+        all_embeddings = []
         for chunk in chunks:
             if "chunk_text" not in chunk or "chunk_id" not in chunk:
                 print(f"Invalid chunk or missing 'chunk_text' or 'chunk_id': {chunk}")
@@ -37,7 +38,7 @@ def get_embedding(chunks):
                 embedding_types=["float"]
             )
             # Verify if embeddings were returned
-            if not embedding_response or not hasattr(embedding_response, 'embeddings') or not   embedding_response.embeddings:
+            if not embedding_response or not hasattr(embedding_response, 'embeddings') or not  embedding_response.embeddings:
                 print(f"No embeddings were returned for chunk {chunk_id}.")
                 continue
 
@@ -45,7 +46,7 @@ def get_embedding(chunks):
             # Add embeddings to the list
             all_embeddings.append((chunk_id, embeddings))
 
-        # Add embeddings to Chroma
+        # Add embeddings to Chroma db (vector store)
         add_embeddings_to_chroma(all_embeddings, chunks)
     except TooManyRequestsError as e:
         print(f"You have exceeded the rate limit: {e}")

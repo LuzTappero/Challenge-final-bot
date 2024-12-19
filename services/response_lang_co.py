@@ -1,10 +1,10 @@
 from langchain_cohere import ChatCohere
 from langchain.prompts import PromptTemplate
+from fastapi import HTTPException
 from langchain.memory import ConversationBufferMemory
 from config.cohere_config import cohere_config
 from dotenv import load_dotenv
 import os
-from services.history_chat import get_chat_history
 
 
 load_dotenv()
@@ -43,17 +43,16 @@ def generate_response_with_db_langchain(relevant_text, query_text):
     """
     try:
         if not relevant_text or not query_text:
-            raise ValueError("El texto relevante o la consulta no pueden estar vacíos.")
+            raise ValueError("Relevant text and query text are required.")
 
         context = "\n".join(
             [f"User: {item['query']}\nAsistent: {item['response']}" for item in conversation_history[-MAX_HISTORY_LENGTH:]]
         )
-
         cohere_model = ChatCohere(
             cohere_api_key= cohere_api_key,
             model="command-r-plus-08-2024",
             temperature=0.0,
-            max_tokens=600
+            max_tokens=400
             )
 
         prompt = PromptTemplate(
@@ -72,9 +71,10 @@ def generate_response_with_db_langchain(relevant_text, query_text):
                 relevant_text=relevant_text,
                 query_text=query_text)
         )
+
         response = response.content if hasattr(response, "content") else response
         if not response:
-            response = "Lo siento, no pude generar una respuesta adecuada."
+            raise HTTPException(status_code=500, detail="Lo siento, no pude generar una respuesta adecuada a partir de la información disponible.")
 
         conversation_history.append({
             "query": query_text,
@@ -83,7 +83,7 @@ def generate_response_with_db_langchain(relevant_text, query_text):
         })
         return response
     except Exception as e:
-        print(f"Error al generar respuesta con LangChain y Cohere: {e}")
+        print(f"Error during response generation: {e}")
         raise
 
 

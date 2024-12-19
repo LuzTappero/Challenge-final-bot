@@ -2,23 +2,23 @@ import re
 
 def clean_relevant_text(results):
     """
-    Limpia y formatea el texto relevante extraído.
+    Clean and process text from search results.
 
     Parameters:
-    - results (list): Lista de resultados donde 'page_content' contiene el texto.
+    - results (list): List of search results with relevant text.
 
     Returns:
-    - str: Texto limpio y procesado.
+    - str: Cleaned and processed text.
     """
-    # Reemplazar saltos de línea por espacios
+    # Replace newlines with spaces
     cleaned_text = results.replace("\n", " ")
 
-    # Convertir todo el texto a minúsculas
+    # Convert to lowercase
     cleaned_text = cleaned_text.lower()
 
-    # Asegurar que las unidades de medida tengan un espacio correcto
+    # Make sure units of measurement are spaced correctly.
     cleaned_text = re.sub(r'(\d+\.\d+|\d+)\s*(mg|g|ml|cm|l|u)', r'\1 \2', cleaned_text)
 
-    # Eliminar caracteres especiales no deseados, excepto algunos como letras, números, puntos, comas, etc.
+    #Remove unwanted special characters, except some such as letters, numbers, periods, commas, etc..
     cleaned_text = re.sub(r'[^a-z0-9\s\.\-\,\(\)\%]', '', cleaned_text)
     return cleaned_text

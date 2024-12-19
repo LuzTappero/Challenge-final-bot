@@ -8,15 +8,15 @@ def add_embeddings_to_chroma(embeddings, chunks):
     """
     Add embeddings to Chroma vector store
     Parameters:
-    embeddings(list)
-    chunks(list)
+        embeddings(list)
+        chunks(list)
     Returns:
     list: ids of added documents
     """
     documents = []
     for chunk, embedding in zip(chunks, embeddings):
         uuids = str(uuid.uuid4())
-        # Create a document with chunk text and id
+        # Create a document with chunk text, chunk id, document name, creation date and category.
         document = Document(
             page_content=chunk["chunk_text"],
             embeddings=embedding,

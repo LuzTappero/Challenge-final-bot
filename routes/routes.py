@@ -16,14 +16,11 @@ async def ask(query: Query):
     - str: The generated response from the language model.
     """
     try:
-        print("entrando a  routes")
         query_text = query.query
         if not query_text or not isinstance(query_text, str):
-            raise HTTPException(status_code=400, detail="Invalid query")
-        print("llamando a orquestador")
+            raise HTTPException(status_code=400, detail="Query parameter is missing or invalid.")
         final_response = orchestrator(query_text)
         return {"response": final_response}
     except Exception as e:
         # Raise an error for any exceptions encountered during processing
-        raise HTTPException(status_code=500, detail=str(e))
-
+        raise HTTPException(status_code=500, detail=f"An unexpected error occurred. Please try again later. Error details: {e}")
