@@ -57,19 +57,18 @@ Librerias y herramientas:
     Asignar un nombre a la colección.
 
 6.  Ejecución única de funciones para la creación de embeddings y almacenamiento en una base de datos vectorial
-    La ejecución de estas funciones se realiza mediante la función process_file, ubicada en el módulo utils. Esta función toma como parámetro la ruta (path) del archivo a procesar y ejecuta los siguientes pasos:
+    La ejecución de estas funciones se realiza mediante la función process_file, ubicada en la carpeta utils. Esta función toma como parámetro la ruta (path) del archivo a procesar y ejecuta los siguientes pasos:
+     - Creación de chunks: Divide el contenido del archivo en fragmentos manejables.
+     -Generación de embeddings: Crea representaciones vectoriales de los fragmentos.
+     - Almacenamiento en Chroma: Guarda los embeddings generados en la base de datos vectorial.
 
-        - Creación de chunks: Divide el contenido del archivo en fragmentos manejables.
-        -Generación de embeddings: Crea representaciones vectoriales de los fragmentos.
-        - Almacenamiento en Chroma: Guarda los embeddings generados en la base de datos vectorial.
+         Ejemplo de ejecución
+         file_path = './output/CARDILIPEN-Bisoprolol fumarato.txt'
+         process_file(file_path)
 
-**Ejemplo de ejecución
-    file_path = './output/CARDILIPEN-Bisoprolol fumarato.txt'
-    process_file(file_path)
-
-    Mensaje de salida
-    print(f"Documents added to Chroma with IDs: {ids} and embeddings: {len(embeddings)} embedding info {embeddings[0]}")
-
+         Mensaje de salida
+         "Documents added to Chroma with IDs: {ids} and embeddings: {len(embeddings)} embedding info {embeddings[0]}"
+      
 
 ## Herramientas utilizadas
 
@@ -97,7 +96,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 - Razón de elección:
     Este modelo fue seleccionado debido a su capacidad multilingüe, esencial para procesar prospectos médicos en diferentes idiomas (importante para escalabilidad del proyecto, por más que actualmente solo procese documentos en español)
     Ofrece representaciones vectoriales de alta calidad, optimizadas para tareas como búsqueda semántica y clasificación.
--Beneficio clave:
+- Beneficio clave:
     Su diseño lo hace ideal para dominios técnicos, garantizando que conceptos médicos complejos se representen con precisión en el espacio vectorial.
 
 
@@ -107,6 +106,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
     Chroma fue seleccionada por su capacidad de almacenar embeddings de manera persistente, asegurando que los datos procesados no se pierdan tras reinicios del sistema.
     Su rendimiento en búsquedas vectoriales es óptimo para escenarios de consulta rápida y frecuente.
     Es sencilla de instalar y ejecutar, lo que permite integrarla fácilmente al flujo de trabajo de desarrollo.
+  
 - Beneficio clave:
     Permite manejar grandes volúmenes de datos vectoriales con búsquedas eficientes y escalabilidad.
     Inicialmente, los datos se almacenan en un directorio local en la computadora, lo que facilita la configuración en entornos de desarrollo o pruebas.
@@ -125,32 +125,32 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 
     Optimización de la búsqueda: La utilización de este enfoque reduce el número de documentos que pasan por el proceso de análisis detallado, mejorando la velocidad y eficiencia del sistema. De este modo, se optimiza el tiempo de procesamiento al centrarse solo en los documentos más relevantes.
 
-Flujo de funcionamiento:
+- Flujo de funcionamiento:
 
-base_retriever: Realiza la búsqueda inicial en el vector store utilizando el método .as_retriever().
-base_compressor: Aplica el modelo de reranking de Cohere para reorganizar y asignar relevancia a los resultados obtenidos.
-compression_threshold: Filtra los documentos eliminando aquellos con un puntaje de relevancia inferior a 0.5, garantizando que solo los documentos más relevantes sean considerados.
+      - base_retriever: Realiza la búsqueda inicial en el vector store utilizando el método .as_retriever().
+      - base_compressor: Aplica el modelo de reranking de Cohere para reorganizar y asignar relevancia a los resultados obtenidos.
+      - compression_threshold: Filtra los documentos eliminando aquellos con un puntaje de relevancia inferior a 0.5, garantizando que solo los documentos más relevantes sean considerados.
 
 * Método invoke para la ejecución de la consulta:
 
-- El método invoke(query_text) proporciona una interfaz directa para ejecutar una consulta con el retriever, lo que permite obtener los resultados rerankeados de manera rápida y eficiente.
-- Simplicidad en la ejecución: Este método permite combinar búsqueda, reranking y filtrado en una sola llamada, eliminando la necesidad de realizar operaciones manuales por separado.
-- Transparencia en los resultados: El método invoke también muestra el score de relevancia para cada documento, lo que facilita la evaluación de la calidad de los resultados y ayuda a tomar decisiones informadas.
+   El método invoke(query_text) proporciona una interfaz directa para ejecutar una consulta (query:str) con el retriever, lo que permite obtener los resultados rerankeados de manera rápida y eficiente.
+   Simplicidad en la ejecución: Este método permite combinar búsqueda, reranking y filtrado en una sola llamada, eliminando la necesidad de realizar operaciones manuales por separado.
+   Transparencia en los resultados: El método invoke también muestra el score de relevancia para cada documento, lo que facilita la evaluación de la calidad de los resultados y ayuda a tomar decisiones informadas.
 
 * Uso del relevance_score para medir la confiabilidad de la respuesta:
 
-- El relevance_score, proporcionado por el modelo de reranking, es un indicador cuantitativo que evalúa qué tan bien un documento responde a la consulta del usuario, permitiendo una medición objetiva de la relevancia.
-- Transparencia en la respuesta: Este puntaje proporciona al usuario un contexto detallado sobre el origen de la información (documento, categoría, fecha de creación), lo que facilita la comprensión de la fiabilidad de la respuesta proporcionada.
-- Medición objetiva: El relevance_score permite identificar fácilmente respuestas potencialmente poco confiables si el puntaje es bajo, ayudando a garantizar que solo se proporcionen respuestas basadas en documentos altamente relevantes.
+  El relevance_score, proporcionado por el modelo de reranking, es un indicador cuantitativo que evalúa qué tan bien un documento responde a la consulta del usuario, permitiendo una medición objetiva de la    relevancia.
+  Transparencia en la respuesta: Este puntaje proporciona al usuario un contexto detallado sobre el origen de la información (documento, categoría, fecha de creación), lo que facilita la comprensión de la     fiabilidad de la respuesta proporcionada.
+  Medición objetiva: El relevance_score permite identificar fácilmente respuestas potencialmente poco confiables si el puntaje es bajo, ayudando a garantizar que solo se proporcionen respuestas basadas en documentos altamente relevantes.
 
 6. Justificación para el uso de ChatCohere con LangChain en la generación de respuestas
 
 1. Uso de ChatCohere
 - Razón de elección:
     Se ha elegido el modelo ChatCohere por su capacidad avanzada en procesamiento de lenguaje natural, específicamente en la generación de respuestas conversacionales.
-    El modelo command-r-plus-08-2024 de Cohere es ideal para tareas de generación de texto en entornos interactivos, ya que maneja de manera eficiente el contexto de la conversación previa y proporciona respuestas coherentes basadas en la consulta del usuario.
+    El modelo command-r-plus-08-2024 de Cohere es ideal para tareas de generación de texto en entornos interactivos y proporciona respuestas coherentes basadas en la consulta del usuario.
 - Beneficio clave:
-    Precisión en la respuesta: El modelo está optimizado para generar respuestas más contextualizadas, utilizando tanto el historial de conversación como el texto relevante extraído de la base de datos.
+    Precisión en la respuesta: El modelo está optimizado para generar respuestas más contextualizadas, utilizando como el texto relevante extraído de la base de datos.
     Configuración flexible: La posibilidad de ajustar la temperature (en este caso 0.0) permite generar respuestas más deterministas y precisas, lo que es importante cuando se necesita una respuesta coherente y clara en el contexto médico o técnico.
 
 
@@ -161,12 +161,12 @@ compression_threshold: Filtra los documentos eliminando aquellos con un puntaje 
     El uso de PromptTemplate en LangChain permite crear un formato consistente para las entradas de texto que se pasan al modelo. Esto asegura que el modelo reciba siempre un contexto coherente para generar una respuesta precisa.
 - Beneficio clave:
     Interoperabilidad: LangChain facilita la integración de diferentes herramientas y componentes de generación de respuestas, incluyendo el acceso a bases de datos, la gestión de estados de conversación y la estructuración de prompts complejos.
-    - Manejo de contexto: LangChain permite mantener y estructurar de manera eficiente el contexto de la conversación anterior, lo que mejora la calidad de las respuestas generadas. Esto es esencial en sistemas interactivos que requieren consistencia y continuidad en las respuestas.
+
 3. Estructura del prompt
 
 -Razón de elección:
     El prompt diseñado dentro de PromptTemplate incluye varias piezas clave de información:
-    Historial de conversación: .................
+    Historial de conversación: contexto de conversación
     Texto relevante: Proporciona el contexto específico relacionado con la consulta actual del usuario, extraído de la base de datos.
     Pregunta del usuario: Especifica la consulta exacta que el modelo debe abordar, lo que asegura que la respuesta esté alineada con la solicitud.
 - Beneficio clave:
@@ -194,8 +194,6 @@ compression_threshold: Filtra los documentos eliminando aquellos con un puntaje 
     Este valor es útil cuando se requiere que el modelo produzca respuestas precisas y controladas, especialmente en un contexto profesional y técnico.
 - Beneficio clave:
     Precisión: Garantiza respuestas menos variadas y más directas, lo cual es esencial cuando se busca proporcionar información precisa y confiable, como en el contexto médico o técnico.
-
-
 
 
 ## Endpoints
