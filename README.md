@@ -37,7 +37,7 @@ Librerias y herramientas:
 
 1. Clonar el repositorio a un directorio local con el siguiente comando
 
-    git clone [https://](https://github.com/LuzTappero/Challenge-final-bot)
+    git clone [https://github.com/LuzTappero/Challenge-final-bot]
 
 2. Creación de un entorno virtual con python
 
@@ -57,11 +57,10 @@ Librerias y herramientas:
     Asignar un nombre a la colección.
 
 6.  Ejecución única de funciones para la creación de embeddings y almacenamiento en una base de datos vectorial
-    La ejecución de estas funciones se realiza mediante la función process_file, ubicada en el módulo utils. Esta función toma como parámetro la ruta (path) del archivo a procesar y ejecuta los siguientes pasos:
-
-        - Creación de chunks: Divide el contenido del archivo en fragmentos manejables.
-        -Generación de embeddings: Crea representaciones vectoriales de los fragmentos.
-        - Almacenamiento en Chroma: Guarda los embeddings generados en la base de datos vectorial.
+    La ejecución de estas funciones se realiza mediante la función process_file, ubicada en la carpeta utils. Esta función toma como parámetro la ruta (path) del archivo a procesar y ejecuta los siguientes pasos:
+     - Creación de chunks: Divide el contenido del archivo en fragmentos manejables.
+     -Generación de embeddings: Crea representaciones vectoriales de los fragmentos.
+     - Almacenamiento en Chroma: Guarda los embeddings generados en la base de datos vectorial.
 
 **Ejemplo de ejecución
     file_path = './output/CARDILIPEN-Bisoprolol fumarato.txt'
