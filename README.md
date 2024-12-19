@@ -37,7 +37,7 @@ Librerias y herramientas:
 
 1. Clonar el repositorio a un directorio local con el siguiente comando
 
-    git clone [https://](https://github.com/LuzTappero/Challenge-final-bot)
+    git clone [https://github.com/LuzTappero/Challenge-final-bot]
 
 2. Creación de un entorno virtual con python
 
@@ -256,3 +256,125 @@ Errores comunes
     {
         "detail": "An unexpected error occurred. Please try again later."
     }
+
+## Ejemplos de uso
+A continuación se detallan algunos de las pruebas realizadas.
+----------------------------------------------------------------------------------
+### Ejemplo de prueba 1
+
+- Consulta del usuario:
+        ¿Qué es el medicamento Aclusin?
+
+- Respuesta:
+        El medicamento Aclusin es un fármaco que contiene el principio activo cilostazol. Está indicado para el tratamiento de los síntomas isquémicos de los miembros, como úlceras, dolor, claudicación intermitente y sensación de frío, causados por la enfermedad arterial oclusiva crónica.
+        Su mecanismo de acción se basa en la inhibición de la enzima fosfodiesterasa tipo III de AMP cíclico (AMPc PDE tipo III), lo que resulta en una mayor concentración de AMPc en el músculo liso vascular y en las plaquetas, produciendo un efecto vasodilatador y antiagregante plaquetario.
+
+- Metadata de la respuesta:
+El documento más relevante se obtuvo del archivo'ACLUSIL-Cilostazol', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 0.98.
+---------------------------------------------------------------------------------
+### Ejemplo de prueba 2
+
+- Consulta del usuario:
+        ¿Cuál es la fórmula del medicamento ALBICAR L-CARNITINA?
+
+- Respuesta:
+        La fórmula del medicamento Albicar L-Carnitina varía según la presentación:
+    * Fórmula inyectable (IM y EV):
+        - Cada ampolla contiene L-Carnitina 1,000 g.
+        - Excipientes: Ácido Clorhídrico 10% 0,014 ml, agua destilada estéril y apirógena c.s.p. 5 ml solución.
+    * Fórmula oral:
+        - Cada ampolla contiene L-Carnitina 1,0000 g.
+        - Excipientes: Ciclamato de sodio 0,0030 g, Ácido Clorhídrico c.s., Sorbato de potasio 0,0100 g, Cetrimida 0,0005 g, Alcohol 0,1500 ml, Aroma naranjas 0,0585 g, Sacarina sódica 0,0040 g, Agua purificada c.s.p. 10,0000 ml.
+
+- Metadata de la respuesta:
+El documento más relevante se obtuvo del archivo'ALBICAR-Lcarnitina', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 1.00.
+-----------------------------------------------------------------------------------
+### Ejemplo de prueba 3
+
+- Consulta del usuario:
+       ¿A qué se conoce como deficiencia de levocarnitina?
+
+- Respuesta:
+        La deficiencia de levocarnitina se define bioquímicamente como niveles anormalmente bajos de carnitina plasmática libre (menos de 20 μmol/l a la semana post término) y puede estar asociada con bajos niveles tisulares o urinarios. Esta condición puede asociarse con una relación éster/levocarnitina libre plasmática mayor de 0,4 o niveles normalmente elevados de levocarnitina esterificada en la orina. En niños prematuros y recién nacidos, la deficiencia secundaria se define como niveles de levocarnitina plasmática libre por debajo de los niveles normales que corresponden a la edad.
+
+- Metadata de la respuesta:
+El documento más relevante se obtuvo del archivo'ALBICAR-Lcarnitina', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 1.00.
+-----------------------------------------------------------------------------------
+### Ejemplo de prueba 4
+
+- Consulta del usuario:
+       ¿Que es el Bemplas clorhidrato de clonidina?
+
+- Respuesta:
+        El Bemplas clorhidrato de clonidina es un medicamento antihipertensivo y diurético. Está autorizado por el Ministerio de Salud y su venta es bajo receta.
+        Su fórmula contiene los siguientes componentes:
+            - Clonidina clorhidrato 0,075 mg
+            - Clortalidona 50,000 mg
+            - Excipientes: almidón de maíz 20,000 mg, lactosa 126,895 mg, croscarmelosa sódica 1,000 mg, estearato de magnesio 2,000 mg, azul patente 0,030 mg.
+        La acción terapéutica se basa en la combinación de la clonidina, que estimula receptores alfa adrenérgicos centrales reduciendo el tono simpático central y la resistencia periférica, y la clortalidona, que actúa como diurético inhibiendo la reabsorción distal de sodio a nivel nefronal.
+
+- Metadata de la respuesta:
+El documento más relevante se obtuvo del archivo'BEMPLAS- Clorhidrato de Clonidina clortalidon', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 1.00.
+-----------------------------------------------------------------------------------
+### Ejemplo de prueba 5
+
+- Consulta del usuario:
+        ¿Como se describe el uso de bemplas en pediatría y geriatría?
+
+- Respuesta:
+        - Uso en pediatría: La seguridad y eficacia de la clortalidona y la clonidina no han sido establecidas en menores de 12 años.
+
+        - Uso en geriatría: La eliminación de la clortalidona es menor en pacientes ancianos en comparación con adultos jóvenes sanos. Por lo tanto, se recomienda un cuidadoso seguimiento clínico e incluso una reducción de la dosis en algunos casos en que se trate a pacientes ancianos.
+
+- Metadata de la respuesta:
+El documento más relevante se obtuvo del archivo'BEMPLAS- Clorhidrato de Clonidina clortalidon', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 0.69.
+-----------------------------------------------------------------------------------
+### Ejemplo de prueba 6
+
+- Consulta del usuaio:
+        ¿Que es el Cardilipen bisoprolol fumarato?
+
+- Respuesta:
+        El Cardilipen bisoprolol fumarato es un medicamento autorizado por el Ministerio de Salud y su venta es bajo receta. Es un betabloqueante selectivo utilizado para el tratamiento de la hipertensión arterial, la prevención de las crisis de angina de pecho y el tratamiento de la insuficiencia cardíaca crónica estable moderada a severa.
+        Su fórmula contiene bisoprolol fumarato en diferentes concentraciones (2,5 mg, 5 mg y 10 mg) y excipientes como celulosa microcristalina, almidón pregelatinizado, hidroxipropilcelulosa, dióxido de silicio coloidal, crospovidona, estearato de magnesio, hidroxipropilmetilcelulosa, polietilenglicol 6000, dióxido de titanio, talco y povidona K30.
+
+- Metadata de la respuesta:
+        El documento más relevante se obtuvo del archivo'CARDILIPEN-Bisoprolol fumarato', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 1.00
+
+-----------------------------------------------------------------------------------
+### Ejemplo de prueba 7
+
+- Consulta del usuario:
+        ¿Qué es el AMPLIAR® 40 ATORVASTATIN?
+
+- Respuesta:
+        El AMPLIAR® 40 ATORVASTATIN es un medicamento autorizado por el Ministerio de Salud y su venta es bajo receta. Está indicado como tratamiento adyuvante para reducir los niveles elevados de colesterol total, LDL-colesterol, apolipoproteína B y triglicéridos en pacientes con hipercolesterolemia primaria y dislipemia mixta.
+
+        Su fórmula contiene atorvastatina cálcica (equivalente a 40 mg de atorvastatina) y excipientes como lactosa, celulosa microcristalina, carboximetilcelulosa cálcica, povidona K30, crospovidona, dióxido de silicio coloidal, estearato de magnesio, dióxido de titanio, hidroxipropilmetilcelulosa, talco y polietilenglicol 6000.
+
+        La acción terapéutica de este medicamento es hipocolesterolemiante, ya que la atorvastatina actúa reduciendo los niveles de lípidos en la sangre al inhibir la enzima HMG-CoA reductasa, la cual es clave en la biosíntesis de colesterol.
+
+- Metadata de la respuesta:
+        El documento más relevante se obtuvo del archivo'AMPLIAR40-Atorvastatina', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 1.00.
+-----------------------------------------------------------------------------------
+### Ejemplo de prueba 8
+
+- Consulta del usuario:
+        Describe la posología y modos de administración de Ampliar duo
+
+- Respuesta:
+        La posología y modo de administración de Ampliar duo es la siguiente:
+            - La dosis inicial recomendada es de 10 mg de atorvastatina y 10 mg de ezetimibe una vez al día.
+            - El medicamento debe ser administrado en una sola toma diaria, en cualquier momento del día, antes o después de la comida.
+            - El comprimido de atorvastatina (identificado con la letra A) y el de ezetimibe (identificado con la letra E) deben ingerirse en la misma toma.
+            - El tratamiento debe adecuarse a la respuesta individual y al objetivo terapéutico.
+            - Después de iniciar el tratamiento y durante la titulación de la dosis, los niveles plasmáticos de lípidos deben controlarse cada 2 a 4 semanas para realizar el ajuste de dosis.
+            - El objetivo es reducir los niveles de LDL, por lo que se recomienda utilizar la concentración de LDL como dato previo al inicio del tratamiento y como valor de control de la respuesta terapéutica.
+            - En pacientes sin respuesta adecuada a la dosis de 20 mg diarios de atorvastatina, se debe iniciar el tratamiento directamente con Ampliar duo 20/10.
+            - En pacientes con respuesta inadecuada a 10 mg diarios de ezetimibe como monoterapia, el tratamiento debe iniciarse con Ampliar duo 10/10.
+        En el caso de la hipercolesterolemia familiar homocigota, Ampliar duo se utiliza como tratamiento adjunto a otros para disminuir la concentración plasmática de lípidos o cuando estos no puedan utilizarse o no estén disponibles.
+
+- Metadata de la respuesta:
+        El documento más relevante se obtuvo del archivo'AMPLIARDUO-Atorvastatin ezetimibe', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 1.00.
+
+-----------------------------------------------------------------------------------
