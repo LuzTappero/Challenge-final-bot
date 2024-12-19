@@ -345,9 +345,7 @@ El documento más relevante se obtuvo del archivo'BEMPLAS- Clorhidrato de Clonid
 
 - Respuesta:
         El AMPLIAR® 40 ATORVASTATIN es un medicamento autorizado por el Ministerio de Salud y su venta es bajo receta. Está indicado como tratamiento adyuvante para reducir los niveles elevados de colesterol total, LDL-colesterol, apolipoproteína B y triglicéridos en pacientes con hipercolesterolemia primaria y dislipemia mixta.
-
         Su fórmula contiene atorvastatina cálcica (equivalente a 40 mg de atorvastatina) y excipientes como lactosa, celulosa microcristalina, carboximetilcelulosa cálcica, povidona K30, crospovidona, dióxido de silicio coloidal, estearato de magnesio, dióxido de titanio, hidroxipropilmetilcelulosa, talco y polietilenglicol 6000.
-
         La acción terapéutica de este medicamento es hipocolesterolemiante, ya que la atorvastatina actúa reduciendo los niveles de lípidos en la sangre al inhibir la enzima HMG-CoA reductasa, la cual es clave en la biosíntesis de colesterol.
 
 - Metadata de la respuesta:
