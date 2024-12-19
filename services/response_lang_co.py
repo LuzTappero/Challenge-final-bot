@@ -1,7 +1,6 @@
 from langchain_cohere import ChatCohere
-from langchain.prompts import PromptTemplate
 from fastapi import HTTPException
-from langchain.memory import ConversationBufferMemory
+from langchain_core.messages import HumanMessage
 from config.cohere_config import cohere_config
 from dotenv import load_dotenv
 import os
@@ -11,11 +10,11 @@ load_dotenv()
 cohere_api_key = os.getenv("COHERE_API_KEY")
 co = cohere_config()
 
-conversation_history = []
-MAX_HISTORY_LENGTH = 5
-
-
-preamble = """
+def generate_response_with_db_langchain(relevant_text, query_text):
+    """
+    Generate a response based on the relevant text and query text using a language model.
+    """
+    preamble = """
 Eres un asistente virtual especializado en proporcionar información precisa y detallada sobre preguntas especificas de medicamentos.
 Sigue estrictamente las siguientes directrices para tus respuestas:
 
@@ -37,18 +36,10 @@ Sigue estrictamente las siguientes directrices para tus respuestas:
 Recuerda: tu objetivo es ofrecer respuestas precisas, organizadas y fáciles de entender sobre medicamentos.
 """
 
-def generate_response_with_db_langchain(relevant_text, query_text):
-    """
-    Generate a response based on the relevant text and query text using a language model.
-    """
     try:
         if not relevant_text or not query_text:
             raise ValueError("Relevant text and query text are required.")
 
-        context = "\n".join(
-            [f"---\nUser: {entry['query']}\nAssistant: {entry['response']}\n" for entry in conversation_history]
-        )
-        
         cohere_model = ChatCohere(
             cohere_api_key= cohere_api_key,
             model="command-r-plus-08-2024",
@@ -56,36 +47,16 @@ def generate_response_with_db_langchain(relevant_text, query_text):
             max_tokens=500
             )
 
-        prompt = PromptTemplate(
-            input_variables=["chat_history", "preamble", "relevant_text", "query_text"],
-            template=(
-                f"{preamble}\n\n"
-                f"Chat History:\n{context}\n\n"
-                f"Relevant text: {relevant_text}\n\nQuestion: {query_text}"
-                f"\n\nQuestion:{query_text}"
-                f"\n\nAnswer:"
-            )
-        )
+        prompt= [
+            HumanMessage(content=preamble),
+            HumanMessage(content=query_text),
+            HumanMessage(content=f"Relevant text: {relevant_text}")
+            ]
 
-        response = cohere_model.invoke(
-            prompt.format(
-                relevant_text=relevant_text,
-                query_text=query_text)
-        )
-
+        response = cohere_model.invoke(prompt)
         response = response.content if hasattr(response, "content") else response
         if not response:
             raise HTTPException(status_code=500, detail="Lo siento, no pude generar una respuesta adecuada a partir de la información disponible.")
-
-        conversation_history.append({
-            "query": query_text,
-            "response": response,
-            "relevant_text": relevant_text
-        })
-
-        if len(conversation_history) > MAX_HISTORY_LENGTH:
-            conversation_history.pop(0)
-
         return response
     except Exception as e:
         print(f"Error during response generation: {e}")

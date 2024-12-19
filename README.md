@@ -1,7 +1,8 @@
-# API Documentation
+# Documentación de API
 
+# BACKEND
 ## Tabla de Contenidos
-1. [Descripción](#descripción)
+1. [Descripción de Backend](#descripción)
 2. [Requisitos](#requisitos)
 3. [Instalación y Configuración](#instalación-y-configuración)
 4. [Herramientas utilizadas](#Herramientas-utilizadas)
@@ -11,11 +12,17 @@
 7. [Ejemplos de Uso](#ejemplos-de-uso)
 8. [Licencia](#licencia)
 
----
+# FRONTEND
+1. [Descripción de Frontend](#descripción)
+2. [Requisitos](#requisitos)
+3. [Instalación y Configuración](#instalación-y-configuración)
+4. [Herramientas utilizadas](#Herramientas-utilizadas)
+5. [Ejemplos de Uso](#ejemplos-de-uso)
 
-## Descripción
 
-Esta API está desarrollada en Python utilizando Flask como framework y basada en arquitectura RAG (Retrieval-Augmented Generation), busca resolver el problema de la subutilización de la información contenida en los prospectos de medicamentos, ya que a pesar de ser una fuente de máximo valor, se encuentra desperdiciada, tanto en su formato físico (generando impactos medioambientales), cómo en su presentación dígital existente ya que la lectura de los mismos resulta tediosa y dificil de comprender.
+## Descripción de Backend
+
+Esta API está desarrollada en Python utilizando Flask como framework y basada en arquitectura RAG (Retrieval-Augmented Generation), busca resolver el problema de la subutilización de la información contenida en los prospectos de medicamentos, ya que a pesar de ser una fuente de máximo valor, se encuentra desperdiciada, tanto en su formato físico (generando impactos medioambientales), cómo en su presentación dígital existente siendo la lectura de los mismos tediosa y dificil de comprender en muchas ocaciones.
 El modelo fue entrenado con prospectos de medicamentos, lo que permite extraer y presentar la información de manera rápida, dinámica y accesible. El propósito de la API es facilitar el acceso a equipos médicos, investigadores, profesional de salud, agilizando el tiempo de tomas de decisiones. Además, tiene como objetivo promover la educación de los pacientes (como consumidores finales) proporcionándoles información clara y comprensible sobre medicamentos, sus usos, efectos secundarios y demás aspectos importantes.
 
 ---
@@ -53,22 +60,27 @@ Librerias y herramientas:
 
 5. Configuración de Chroma db(config/chromadb_config)
 
-    Establecer un directorio local para almacenamiento de la información
+    Crear un directorio local para almacenamiento de la información
     Asignar un nombre a la colección.
 
-6.  Ejecución única de funciones para la creación de embeddings y almacenamiento en una base de datos vectorial
-    La ejecución de estas funciones se realiza mediante la función process_file, ubicada en la carpeta utils. Esta función toma como parámetro la ruta (path) del archivo a procesar y ejecuta los siguientes pasos:
+6.  Ejecución única de funciones para la creación de embeddings y almacenamiento en la base de datos vectorial
+    La ejecución de estas funciones se realiza mediante la función process_file(file_path), ubicada en la carpeta 'utils'. Esta función toma como parámetro la ruta (file_path) de los archivos a procesar (ubicados en la carpeta outout) y ejecuta los siguientes funciones:
      - Creación de chunks: Divide el contenido del archivo en fragmentos manejables.
-     -Generación de embeddings: Crea representaciones vectoriales de los fragmentos.
+     - Generación de embeddings: Crea representaciones vectoriales de los fragmentos.
      - Almacenamiento en Chroma: Guarda los embeddings generados en la base de datos vectorial.
 
-         Ejemplo de ejecución
-         file_path = './output/CARDILIPEN-Bisoprolol fumarato.txt'
-         process_file(file_path)
+         Ejemplo de ejecución:
+         Se declara la variable 'file_path' y se le asigna la ruta del archivo de interes ubicado en la carpeta 'output'
+            file_path = './output/CARDILIPEN-Bisoprolol fumarato.txt'
 
-         Mensaje de salida
-         "Documents added to Chroma with IDs: {ids} and embeddings: {len(embeddings)} embedding info {embeddings[0]}"
-      
+        Ejecución de la función:
+            process_file(file_path)
+
+        Mensaje de salida
+        "Documents added to Chroma with IDs: {ids} and embeddings: {len(embeddings)} embedding info {embeddings[0]}"
+
+7. Una vez que ya está todo instalado y los embeddings creados se puede proceder a interactuar con la API a través de herramientas como POSTMAN. (ver [EndPoints](#endpoints))
+
 
 ## Herramientas utilizadas
 
@@ -83,18 +95,18 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 
 - Razón de elección:
     Herramienta para generación de chunks.
-    El tamaño del chunk size elegido fue de 2000 caracteres ya que de ésta manera garantiza un balance entre la retención del contexto y la capacidad del modelo de embeddings para procesar cada fragmento.
+    El tamaño del chunk elegido fue de 2000 caracteres ya que de ésta manera garantiza un balance entre la retención del contexto y la capacidad del modelo de embeddings para procesar cada fragmento.
     El solapamiento elegido fue de 200 caracteres, ésto asegura que no se pierda información clave del documento, especialmente en textos donde cada palabra es sumamente importante.
 
 - Beneficio clave:
     Esta técnica permite dividir el texto en fragmentos procesables sin sacrificar la coherencia contextual, optimizando tanto el rendimiento como la relevancia en las búsquedas posteriores.
 - Experimentos realizados:
-    Durante pruebas iniciales, chunks más grandes disminuían la precisión del modelo y chunks más pequeños fragmentaban demasiado el contenido.
+    Durante pruebas iniciales chunks más pequeños fragmentaban demasiado el contenido.
 
 3. Modelo de embeddings embed-multilingual-v3.0 de Cohere
 
 - Razón de elección:
-    Este modelo fue seleccionado debido a su capacidad multilingüe, esencial para procesar prospectos médicos en diferentes idiomas (importante para escalabilidad del proyecto, por más que actualmente solo procese documentos en español)
+    Este modelo fue seleccionado debido a su capacidad multilingüe, esencial para procesar prospectos médicos en diferentes idiomas (importante para escalabilidad del proyecto, por más que actualmente procese documentos en español)
     Ofrece representaciones vectoriales de alta calidad, optimizadas para tareas como búsqueda semántica y clasificación.
 - Beneficio clave:
     Su diseño lo hace ideal para dominios técnicos, garantizando que conceptos médicos complejos se representen con precisión en el espacio vectorial.
@@ -106,10 +118,10 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
     Chroma fue seleccionada por su capacidad de almacenar embeddings de manera persistente, asegurando que los datos procesados no se pierdan tras reinicios del sistema.
     Su rendimiento en búsquedas vectoriales es óptimo para escenarios de consulta rápida y frecuente.
     Es sencilla de instalar y ejecutar, lo que permite integrarla fácilmente al flujo de trabajo de desarrollo.
-  
+
 - Beneficio clave:
-    Permite manejar grandes volúmenes de datos vectoriales con búsquedas eficientes y escalabilidad.
-    Inicialmente, los datos se almacenan en un directorio local en la computadora, lo que facilita la configuración en entornos de desarrollo o pruebas.
+    Permite manejar grandes volúmenes de datos vectoriales con búsquedas eficientes.
+    Inicialmente, los datos se almacenan en un directorio local, lo que facilita la configuración en entornos de desarrollo o pruebas.
     En un futuro, podría configurarse para almacenar los datos en un servidor dedicado, lo que permitiría escalar el sistema para un mayor volumen de datos o accesos concurrentes.
 
 5. Acceso a la base de datos y reranking de los documentos obtenidos
@@ -119,7 +131,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 - Razón de elección:
     El modelo rerank-english-v2.0 de Cohere fue seleccionado como base para el reranking debido a su capacidad para realizar una clasificación precisa de documentos, asignando un puntaje de relevancia a cada uno de los resultados. Este modelo es especialmente eficaz en la optimización del ranking de documentos al filtrar los menos relevantes.
 
-    El ContextualCompressionRetriever optimiza la búsqueda inicial realizada en el vector store, utilizando el método .as_retriever junto con el modelo de reranking rerank-english-v2.0 de Cohere. Este enfoque asegura que solo los documentos más relevantes sean retenidos, eliminando aquellos que no cumplen con un umbral mínimo de relevancia, definido como compression_threshold = 0.5 (lo que implica que los documentos con un puntaje menor a 0.5 serán descartados). Además, el parámetro search_kwargs={'k': 3} permite configurar el número de resultados iniciales a evaluar, asegurando que solo se consideren los tres documentos más relevantes en la búsqueda inicial.
+    El ContextualCompressionRetriever optimiza la búsqueda inicial realizada en el vector store, utilizando el método '.as_retriever' junto con el modelo de reranking 'rerank-english-v2.0' de Cohere. Este enfoque asegura que solo los documentos más relevantes sean retenidos, eliminando aquellos que no cumplen con un umbral mínimo de relevancia, definido como compression_threshold = 0.5 (lo que implica que los documentos con un puntaje menor a 0.5 serán descartados). Además, el parámetro search_kwargs={'k': 3} permite configurar el número de resultados iniciales a evaluar, asegurando que solo se consideren los tres documentos más relevantes en la búsqueda inicial.
 
 - Beneficios clave:
 
@@ -128,72 +140,60 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 - Flujo de funcionamiento:
 
       - base_retriever: Realiza la búsqueda inicial en el vector store utilizando el método .as_retriever().
-      - base_compressor: Aplica el modelo de reranking de Cohere para reorganizar y asignar relevancia a los resultados obtenidos.
+      - base_compressor: Aplica el modelo de reranking de Cohere configurado para reorganizar y asignar relevancia a los resultados obtenidos.
       - compression_threshold: Filtra los documentos eliminando aquellos con un puntaje de relevancia inferior a 0.5, garantizando que solo los documentos más relevantes sean considerados.
 
 * Método invoke para la ejecución de la consulta:
 
    El método invoke(query_text) proporciona una interfaz directa para ejecutar una consulta (query:str) con el retriever, lo que permite obtener los resultados rerankeados de manera rápida y eficiente.
-   Simplicidad en la ejecución: Este método permite combinar búsqueda, reranking y filtrado en una sola llamada, eliminando la necesidad de realizar operaciones manuales por separado.
+   Simplicidad en la ejecución: Este método permite combinar búsqueda, reranking y filtrado en una sola llamada, eliminando la necesidad de realizar operaciones manuales por separado (por ejemplo, no es necesario realizar el embedding de la query ya que se ejecute por detras del método invoke)
    Transparencia en los resultados: El método invoke también muestra el score de relevancia para cada documento, lo que facilita la evaluación de la calidad de los resultados y ayuda a tomar decisiones informadas.
 
 * Uso del relevance_score para medir la confiabilidad de la respuesta:
 
-  El relevance_score, proporcionado por el modelo de reranking, es un indicador cuantitativo que evalúa qué tan bien un documento responde a la consulta del usuario, permitiendo una medición objetiva de la    relevancia.
-  Transparencia en la respuesta: Este puntaje proporciona al usuario un contexto detallado sobre el origen de la información (documento, categoría, fecha de creación), lo que facilita la comprensión de la     fiabilidad de la respuesta proporcionada.
-  Medición objetiva: El relevance_score permite identificar fácilmente respuestas potencialmente poco confiables si el puntaje es bajo, ayudando a garantizar que solo se proporcionen respuestas basadas en documentos altamente relevantes.
+  El relevance_score, proporcionado por el modelo de reranking, es un indicador cuantitativo que evalúa qué tan bien un documento responde a la consulta del usuario, permitiendo una medición objetiva de la relevancia.
 
-6. Justificación para el uso de ChatCohere con LangChain en la generación de respuestas
+6. Justificación para el uso de Generación de Respuestas con Cohere y Langchain
 
 1. Uso de ChatCohere
 - Razón de elección:
-    Se ha elegido el modelo ChatCohere por su capacidad avanzada en procesamiento de lenguaje natural, específicamente en la generación de respuestas conversacionales.
-    El modelo command-r-plus-08-2024 de Cohere es ideal para tareas de generación de texto en entornos interactivos y proporciona respuestas coherentes basadas en la consulta del usuario.
+    Se ha optado por el modelo ChatCohere debido a su capacidad avanzada de procesamiento de lenguaje natural, especialmente en tareas de generación de respuestas conversacionales. El modelo command-r-plus-08-2024 de Cohere es ideal para generar respuestas coherentes y relevantes en entornos interactivos, proporcionando respuestas precisas basadas en la consulta del usuario.
 - Beneficio clave:
-    Precisión en la respuesta: El modelo está optimizado para generar respuestas más contextualizadas, utilizando como el texto relevante extraído de la base de datos.
-    Configuración flexible: La posibilidad de ajustar la temperature (en este caso 0.0) permite generar respuestas más deterministas y precisas, lo que es importante cuando se necesita una respuesta coherente y clara en el contexto médico o técnico.
-
+    Precisión en la respuesta: El modelo está optimizado para generar respuestas altamente contextualizadas, utilizando texto relevante extraído de la base de datos.
+    Configuración flexible: Ajustar parámetros como temperature=0.0 permite que el modelo adopte una actitud más determinista y genere respuestas precisas y coherentes en cada interacción.
 
 2. Integración con LangChain
 
 - Razón de elección:
-    LangChain se utiliza para estructurar de manera flexible y poderosa las interacciones entre los diferentes componentes del sistema. En este caso, se ha combinado con ChatCohere para proporcionar un flujo de trabajo robusto en la generación de respuestas.
-    El uso de PromptTemplate en LangChain permite crear un formato consistente para las entradas de texto que se pasan al modelo. Esto asegura que el modelo reciba siempre un contexto coherente para generar una respuesta precisa.
+    La biblioteca Langchain proporciona una forma intuitiva de organizar las interacciones con los modelos de lenguaje, facilitando la creación de prompts y el manejo de las respuestas. Al utilizar HumanMessage, se establece un contexto conversacional claro para el modelo.
+
 - Beneficio clave:
-    Interoperabilidad: LangChain facilita la integración de diferentes herramientas y componentes de generación de respuestas, incluyendo el acceso a bases de datos, la gestión de estados de conversación y la estructuración de prompts complejos.
+    Interoperabilidad: LangChain facilita la integración de diferentes herramientas y componentes de generación de respuestas.
+    Estructuración eficiente de prompts: LangChain permite agregar múltiples mensajes al prompt, lo que es útil para proporcionar información adicional o modificar el comportamiento del modelo.
 
 3. Estructura del prompt
 
+El prompt se compone de tres partes principales: un preámbulo que establece las instrucciones generales de comportamiento para el modelo, la consulta del usuario y el contenido relevante obtenido de la base de datos. Esta estructura garantiza que el modelo tenga acceso a toda la información necesaria para generar respuestas precisas y contextualizadas.
+
 -Razón de elección:
-    El prompt diseñado dentro de PromptTemplate incluye varias piezas clave de información:
-    Historial de conversación: contexto de conversación
-    Texto relevante: Proporciona el contexto específico relacionado con la consulta actual del usuario, extraído de la base de datos.
-    Pregunta del usuario: Especifica la consulta exacta que el modelo debe abordar, lo que asegura que la respuesta esté alineada con la solicitud.
+     Esta estructura permite que el modelo comprenda tanto el contexto general del tema (a través del preámbulo y el contenido relevante) como la pregunta específica del usuario.
 - Beneficio clave:
-    Contexto completo: El uso de varias variables en el prompt ayuda a garantizar que el modelo de lenguaje genere respuestas precisas y relevantes, ya que el modelo tiene acceso tanto al contexto general (historial) como a la información específica de la consulta.
-    Eficiencia: La plantilla de prompt estructurada facilita la reutilización y modificación de la lógica de generación de respuestas, mejorando la escalabilidad y mantenibilidad del código.
+    Contexto completo: Al incluir el preámbulo, la consulta del usuario y el contenido relevante en el prompt, se proporciona al modelo un contexto rico y completo, lo que mejora la calidad de las respuestas.
+    Eficiencia: La estructura clara y concisa del prompt optimiza el proceso de generación de respuestas, reduciendo el tiempo de procesamiento y mejorando la eficiencia.
 
 4. Manejo de Respuesta
 - Razón de elección:
-    El código maneja la respuesta generada asegurando que se capture correctamente el contenido de la respuesta y se controle adecuadamente el caso donde no se genera una respuesta.
-    En caso de que no se obtenga una respuesta válida, se proporciona un mensaje predeterminado que mantiene la calidad de la experiencia del usuario.
+    El código maneja las respuestas generadas asegurándose de capturar correctamente el contenido y controlando los casos en los que no se obtiene una respuesta válida.
 - Beneficio clave:
     Resiliencia: La capacidad de manejar excepciones y errores garantiza que el sistema no falle ante entradas inválidas o problemas en la generación de la respuesta.
     Experiencia de usuario: Si no se genera una respuesta, se ofrece un mensaje claro que informa al usuario de manera amigable, sin interrumpir el flujo de la aplicación.
-5. Uso de conversation_history
-- Razón de elección:
-    El uso del conversation_history para mantener un historial de interacciones anteriores es esencial para garantizar que el modelo responda de manera coherente a lo largo de la conversación.
-    El parámetro MAX_HISTORY_LENGTH limita el tamaño del historial almacenado, lo que permite un balance entre contexto y rendimiento, evitando que el modelo reciba una cantidad excesiva de datos innecesarios.
-- Beneficio clave:
-    Coherencia en la interacción: Mantener un historial de conversación permite que el modelo responda de manera natural y fluida, recordando las preguntas anteriores del usuario y ofreciendo respuestas más personalizadas.
-- Optimización de recursos: Limitar el tamaño del historial a un número fijo de interacciones evita sobrecargar al modelo con demasiada información, lo que mejora el rendimiento y reduce el costo computacional.
 
 6. Justificación para el uso del temperature=0.0
 - Razón de elección:
-    Se ha elegido un valor de temperature=0.0 para el modelo, lo que implica que las respuestas generadas serán más deterministas y coherentes.
+    Se ha elegido un valor de temperature=0.0 para el modelo, lo que implica que las respuestas generadas serán más deterministas, precisas y coherentes.
     Este valor es útil cuando se requiere que el modelo produzca respuestas precisas y controladas, especialmente en un contexto profesional y técnico.
 - Beneficio clave:
-    Precisión: Garantiza respuestas menos variadas y más directas, lo cual es esencial cuando se busca proporcionar información precisa y confiable, como en el contexto médico o técnico.
+    Precisión: Garantiza respuestas menos variadas y más directas, lo cual es esencial cuando se busca proporcionar información precisa y confiable.
 
 
 ## Endpoints
@@ -255,8 +255,9 @@ Errores comunes
         "detail": "An unexpected error occurred. Please try again later."
     }
 
+
 ## Ejemplos de uso
-A continuación se detallan algunos de las pruebas realizadas.
+A continuación se detallan algunos de las pruebas realizadas, las mismas fueron realizadas a través de la interfaz gráfica realizada con REACT.Js-
 ----------------------------------------------------------------------------------
 ### Ejemplo de prueba 1
 
@@ -372,3 +373,47 @@ El documento más relevante se obtuvo del archivo'BEMPLAS- Clorhidrato de Clonid
         El documento más relevante se obtuvo del archivo'AMPLIARDUO-Atorvastatin ezetimibe', perteneciente a la categoria de farmacos de Medicamentos Cardiovasculares  cargado el 2024-12-18, con una puntuación de relevancia de 1.00.
 
 -----------------------------------------------------------------------------------
+
+# FRONTEND
+## Descripción de Frontend
+
+El frontend de la aplicación ha sido desarrollado utilizando React.js y se encuentra en un servidor diferente que interactúa con la API proporcionada en el backend. Esta separación permite una arquitectura más escalable y modular.
+Este servidor frontend se comunica con la API del backend para generar respuestas y proporcionar funcionalidades interactivas al usuario.
+
+
+## Requisitos
+ - Node.js (recomendado: versión 16 o superior): puedes verificar si tienes instalado Node.js   desde tu terminal con el siguiente comando:
+
+    node -v
+
+ - Clona el repositorio del frontend: Clona el repositorio del frontend usando Git. Abre una terminal y ejecuta el siguiente comando:
+
+    git clone <URL_DEL_REPOSITORIO>
+
+
+ - Navegar al directorio del proyecto:
+
+    Una vez clonado el repositorio, navega dentro del directorio del proyecto:
+
+    cd <https://github.com/LuzTappero/MEDICABOT-Frontend.git>
+
+    - Instalar las dependencias: Instala las dependencias necesarias para el proyecto ejecutando el siguiente comando:
+
+        npm install
+
+
+    - Ejecutar el servidor de desarrollo: Para iniciar el servidor de desarrollo, ejecuta el siguiente comando:
+
+        npm run dev
+
+    Este comando ejecutará Vite, el servidor de desarrollo configurado en el proyecto, y podrás acceder a la aplicación en tu navegador.
+
+Acceso a la aplicación:
+Cuando el servidor se haya iniciado correctamente, verás un mensaje similar al siguiente en la terminal:
+
+    VITE v6.0.3  ready in 1300 ms
+
+    ➜  Local:   http://localhost:5173/
+    ➜  press h + enter to show help
+
+

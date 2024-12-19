@@ -26,16 +26,15 @@ def reranked_retriever(query_text):
     )
 
     # Create a ContextualCompressionRetriever that uses the reranker as the base compressor
-    #El siguiente codigo es una herramienta que mejora la recuperacion de los docs optimizando el ranking y filtrando los resultados por relevancia
+
     retriever = ContextualCompressionRetriever(
-        base_compressor=reranker, #Modelo de rankeo -asigna el score
-        base_retriever=vector_store.as_retriever(), #componente que hace la busqueda inicial en el vector store
-        compression_threshold=0.4, #define el umbral de compresion o "relevancia", auqellos menores a 0.4 se eliminan
+        base_compressor=reranker,
+        base_retriever=vector_store.as_retriever(),
+        compression_threshold=0.5,
         search_kwargs={'k': 3}
     )
 
     # Get the reranked results from the retriever
-    #El siguiente codigo usa el retriever configurado previamente para obtener los resultados reordenados(reranked) con base en la consulta query_text. El invoke ejecuta el retriever ocn la query text
     reranked_results = retriever.invoke(query_text)
     if not reranked_results:
         raise HTTPException(status_code=404, detail="No results found")
