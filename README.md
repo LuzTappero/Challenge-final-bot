@@ -96,8 +96,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 - Razón de elección:
     Este modelo fue seleccionado debido a su capacidad multilingüe, esencial para procesar prospectos médicos en diferentes idiomas (importante para escalabilidad del proyecto, por más que actualmente solo procese documentos en español)
     Ofrece representaciones vectoriales de alta calidad, optimizadas para tareas como búsqueda semántica y clasificación.
-  
--Beneficio clave:
+- Beneficio clave:
     Su diseño lo hace ideal para dominios técnicos, garantizando que conceptos médicos complejos se representen con precisión en el espacio vectorial.
 
 
