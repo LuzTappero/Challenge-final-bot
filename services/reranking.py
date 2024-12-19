@@ -30,7 +30,7 @@ def reranked_retriever(query_text):
     retriever = ContextualCompressionRetriever(
         base_compressor=reranker, #Modelo de rankeo -asigna el score
         base_retriever=vector_store.as_retriever(), #componente que hace la busqueda inicial en el vector store
-        compression_threshold=0.5, #define el umbral de compresion o "relevancia", auqellos menores a 0.2 se eliminan
+        compression_threshold=0.4, #define el umbral de compresion o "relevancia", auqellos menores a 0.4 se eliminan
         search_kwargs={'k': 3}
     )
 
@@ -44,6 +44,7 @@ def reranked_retriever(query_text):
     result = reranked_results[0]
     #Relevancia del resultado primero
     relevance_score = result.metadata['relevance_score']
+
     document_name = result.metadata['document_name']
     category_drug = result.metadata['category']
     creation_date = result.metadata['creation_date']
@@ -65,8 +66,4 @@ def reranked_retriever(query_text):
     if clean_information is not None:
         return clean_information
     else:
-        raise HTTPException(status_code=404, detail="Lo siento, no encontré información relevante en mi base de datos para responder tu consulta.")
-
-
-
-
+        raise HTTPException(status_code=404, detail="Lo siento, no poseo información relevante en mi base de datos para responder tu consulta.")

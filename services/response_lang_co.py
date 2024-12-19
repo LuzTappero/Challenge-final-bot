@@ -46,13 +46,14 @@ def generate_response_with_db_langchain(relevant_text, query_text):
             raise ValueError("Relevant text and query text are required.")
 
         context = "\n".join(
-            [f"User: {item['query']}\nAsistent: {item['response']}" for item in conversation_history[-MAX_HISTORY_LENGTH:]]
+            [f"---\nUser: {entry['query']}\nAssistant: {entry['response']}\n" for entry in conversation_history]
         )
+        
         cohere_model = ChatCohere(
             cohere_api_key= cohere_api_key,
             model="command-r-plus-08-2024",
             temperature=0.0,
-            max_tokens=400
+            max_tokens=500
             )
 
         prompt = PromptTemplate(
@@ -81,6 +82,10 @@ def generate_response_with_db_langchain(relevant_text, query_text):
             "response": response,
             "relevant_text": relevant_text
         })
+
+        if len(conversation_history) > MAX_HISTORY_LENGTH:
+            conversation_history.pop(0)
+
         return response
     except Exception as e:
         print(f"Error during response generation: {e}")
