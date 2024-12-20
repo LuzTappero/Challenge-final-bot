@@ -91,8 +91,8 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 
 1. pdfplumber para la extracción de texto
 
-    - Razón de elección: pdfplumber fue seleccionado por su capacidad robusta para manejar documentos PDF complejos, permitiendo extraer texto incluso de estructuras avanzadas como tablas, encabezados y pies de página.
-    - Beneficio clave: La herramienta sobresale en el procesamiento de PDFs que contienen múltiples formatos de texto y diseño, lo que garantiza que el contenido del prospecto médico se extraiga con precisión sin pérdida de información relevante.
+- Razón de elección: pdfplumber fue seleccionado por su capacidad robusta para manejar documentos PDF complejos, permitiendo extraer texto incluso de estructuras avanzadas como tablas, encabezados y pies de página.
+- Beneficio clave: La herramienta sobresale en el procesamiento de PDFs que contienen múltiples formatos de texto y diseño, lo que garantiza que el contenido del prospecto médico se extraiga con precisión sin pérdida de información relevante.
 
 2. LangChainRecursiveTextSplitter
 
