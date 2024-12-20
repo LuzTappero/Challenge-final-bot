@@ -159,6 +159,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 6. GENERACIÓN DE RESPUESTA FINAL CON MODELO DE COHERE Y HERRAMIENTAS DE LANGCHAIN
    
 * Uso de ChatCohere
+  
 - Razón de elección:
     Se ha optado por la clase de ChatCohere debido a su capacidad avanzada de procesamiento de lenguaje natural, especialmente en tareas de generación de respuestas conversacionales. El modelo command-r-plus-08-2024 de Cohere es ideal para generar respuestas coherentes y relevantes en entornos interactivos, proporcionando respuestas precisas basadas en la consulta del usuario.
 - Beneficio clave:
@@ -185,6 +186,7 @@ El prompt se compone de tres partes principales: un preámbulo que establece las
     Eficiencia: La estructura clara y concisa del prompt optimiza el proceso de generación de respuestas, reduciendo el tiempo de procesamiento y mejorando la eficiencia.
 
 * Manejo de Respuesta
+  
 - Razón de elección:
     El código maneja las respuestas generadas asegurándose de capturar correctamente el contenido y controlando los casos en los que no se obtiene una respuesta válida.
 - Beneficio clave:
@@ -192,6 +194,7 @@ El prompt se compone de tres partes principales: un preámbulo que establece las
     Experiencia de usuario: Si no se genera una respuesta, se ofrece un mensaje claro que informa al usuario de manera amigable, sin interrumpir el flujo de la aplicación.
 
 * Justificación para el uso del temperature=0.0
+
 - Razón de elección:
     Se ha elegido un valor de temperature=0.0 para el modelo, lo que implica que las respuestas generadas serán más deterministas, precisas y coherentes.
     Este valor es útil cuando se requiere que el modelo produzca respuestas precisas y controladas, especialmente en un contexto profesional y técnico.
@@ -261,7 +264,7 @@ Errores comunes
 
 ## Ejemplos de uso
 A continuación se detallan algunos de las pruebas realizadas, las mismas fueron realizadas a través de la interfaz gráfica realizada con REACT.Js
-En el caso de prueba con un entorno como postman, tanto la query debe ser ingresada en formato JSON.
+En el caso de prueba con un entorno como postman, la query debe ser ingresada en formato JSON.
 
 Ejemplo con formato JSON
 - Entrada:
