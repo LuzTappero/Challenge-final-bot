@@ -89,12 +89,12 @@ Librerias y herramientas:
 
 Este proyecto se desarrolló con una seria de herramientas y configuraciones para garantizar la eficiencia y escalabilidad. A continuación, se detallan las decisiones clave:
 
-1. pdfplumber para la extracción de texto
+1. PDF PLUMBER PARA LA EXTRACCIÓN DE TEXTO
 
 - Razón de elección: pdfplumber fue seleccionado por su capacidad robusta para manejar documentos PDF complejos, permitiendo extraer texto incluso de estructuras avanzadas como tablas, encabezados y pies de página.
 - Beneficio clave: La herramienta sobresale en el procesamiento de PDFs que contienen múltiples formatos de texto y diseño, lo que garantiza que el contenido del prospecto médico se extraiga con precisión sin pérdida de información relevante.
 
-2. LangChainRecursiveTextSplitter
+2. LANGCHAIN RECURSIVE TEXT SPLITTER
 
 - Razón de elección:
     Herramienta para generación de chunks.
@@ -106,7 +106,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 - Experimentos realizados:
     Durante pruebas iniciales chunks más pequeños fragmentaban demasiado el contenido.
 
-3. Modelo de embeddings embed-multilingual-v3.0 de Cohere
+3. MODELO DE EMBEDDINGS 'EMBED MULTILINGUAL-V3.0 DE COHERE"
 
 - Razón de elección:
     Este modelo fue seleccionado debido a su capacidad multilingüe, esencial para procesar prospectos médicos en diferentes idiomas (importante para escalabilidad del proyecto, por más que actualmente procese documentos en español)
@@ -115,7 +115,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
     Su diseño lo hace ideal para dominios técnicos, garantizando que conceptos médicos complejos se representen con precisión en el espacio vectorial.
 
 
-4. Base de datos Chroma como vector store persistente
+4. BASDE DE DATOS CHROMA COMO VECTOR STORE PERSISTENTE
 
 - Razón de elección:
     Chroma fue seleccionada por su capacidad de almacenar embeddings de manera persistente, asegurando que los datos procesados no se pierdan tras reinicios del sistema.
@@ -127,7 +127,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
     Inicialmente, los datos se almacenan en un directorio local, lo que facilita la configuración en entornos de desarrollo o pruebas.
     En un futuro, podría configurarse para almacenar los datos en un servidor dedicado, lo que permitiría escalar el sistema para un mayor volumen de datos o accesos concurrentes.
 
-5. Acceso a la base de datos y reranking de los documentos obtenidos
+5. ACCESO A LA BASE DE DATOS Y RERANKING DE LOS DOCUMENTOS OBTENIDOS
 
 * Cohere Reranker (de langchain_cohere) y ContextualCompressionRetriever (de langchain.retrievers)
 
@@ -156,16 +156,16 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 
   El relevance_score, proporcionado por el modelo de reranking, es un indicador cuantitativo que evalúa qué tan bien un documento responde a la consulta del usuario, permitiendo una medición objetiva de la relevancia.
 
-6. Justificación para el uso de Generación de Respuestas con Cohere y Langchain
-
-1. Uso de ChatCohere
+6. GENERACIÓN DE RESPUESTA FINAL CON MODELO DE COHERE Y HERRAMIENTAS DE LANGCHAIN
+   
+* Uso de ChatCohere
 - Razón de elección:
     Se ha optado por la clase de ChatCohere debido a su capacidad avanzada de procesamiento de lenguaje natural, especialmente en tareas de generación de respuestas conversacionales. El modelo command-r-plus-08-2024 de Cohere es ideal para generar respuestas coherentes y relevantes en entornos interactivos, proporcionando respuestas precisas basadas en la consulta del usuario.
 - Beneficio clave:
     Precisión en la respuesta: El modelo está optimizado para generar respuestas altamente contextualizadas, utilizando texto relevante extraído de la base de datos.
     Configuración flexible: Ajustar parámetros como temperature=0.0 permite que el modelo adopte una actitud más determinista y genere respuestas precisas y coherentes en cada interacción.
 
-2. Integración con LangChain
+* Integración con LangChain
 
 - Razón de elección:
     La biblioteca Langchain proporciona una forma intuitiva de organizar las interacciones con los modelos de lenguaje, facilitando la creación de prompts y el manejo de las respuestas. Al utilizar HumanMessage, se establece un contexto conversacional claro para el modelo.
@@ -174,7 +174,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
     Interoperabilidad: LangChain facilita la integración de diferentes herramientas y componentes de generación de respuestas.
     Estructuración eficiente de prompts: LangChain permite agregar múltiples mensajes al prompt, lo que es útil para proporcionar información adicional o modificar el comportamiento del modelo.
 
-3. Estructura del prompt
+* Estructura del prompt
 
 El prompt se compone de tres partes principales: un preámbulo que establece las instrucciones generales de comportamiento para el modelo, la consulta del usuario y el contenido relevante obtenido de la base de datos. Esta estructura garantiza que el modelo tenga acceso a toda la información necesaria para generar respuestas precisas y contextualizadas.
 
@@ -184,14 +184,14 @@ El prompt se compone de tres partes principales: un preámbulo que establece las
     Contexto completo: Al incluir el preámbulo, la consulta del usuario y el contenido relevante en el prompt, se proporciona al modelo un contexto rico y completo, lo que mejora la calidad de las respuestas.
     Eficiencia: La estructura clara y concisa del prompt optimiza el proceso de generación de respuestas, reduciendo el tiempo de procesamiento y mejorando la eficiencia.
 
-4. Manejo de Respuesta
+* Manejo de Respuesta
 - Razón de elección:
     El código maneja las respuestas generadas asegurándose de capturar correctamente el contenido y controlando los casos en los que no se obtiene una respuesta válida.
 - Beneficio clave:
     Resiliencia: La capacidad de manejar excepciones y errores garantiza que el sistema no falle ante entradas inválidas o problemas en la generación de la respuesta.
     Experiencia de usuario: Si no se genera una respuesta, se ofrece un mensaje claro que informa al usuario de manera amigable, sin interrumpir el flujo de la aplicación.
 
-6. Justificación para el uso del temperature=0.0
+* Justificación para el uso del temperature=0.0
 - Razón de elección:
     Se ha elegido un valor de temperature=0.0 para el modelo, lo que implica que las respuestas generadas serán más deterministas, precisas y coherentes.
     Este valor es útil cuando se requiere que el modelo produzca respuestas precisas y controladas, especialmente en un contexto profesional y técnico.
