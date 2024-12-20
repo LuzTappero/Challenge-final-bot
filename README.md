@@ -10,7 +10,7 @@
    1. [POST /ask_question](#post-users)
 6. [Errores](#errores)
 7. [Ejemplos de Uso](#ejemplos-de-uso)
-8. [Licencia](#licencia)
+
 
 # FRONTEND
 1. [Descripción de Frontend](#descripción)
@@ -25,7 +25,6 @@
 Esta API está desarrollada en Python utilizando Flask como framework y basada en arquitectura RAG (Retrieval-Augmented Generation), busca resolver el problema de la subutilización de la información contenida en los prospectos de medicamentos, ya que a pesar de ser una fuente de máximo valor, se encuentra desperdiciada, tanto en su formato físico (generando impactos medioambientales), cómo en su presentación dígital existente siendo la lectura de los mismos tediosa y dificil de comprender en muchas ocaciones.
 El modelo fue entrenado con prospectos de medicamentos, lo que permite extraer y presentar la información de manera rápida, dinámica y accesible. El propósito de la API es facilitar el acceso a equipos médicos, investigadores, profesional de salud, agilizando el tiempo de tomas de decisiones. Además, tiene como objetivo promover la educación de los pacientes (como consumidores finales) proporcionándoles información clara y comprensible sobre medicamentos, sus usos, efectos secundarios y demás aspectos importantes.
 
----
 
 ## Requisitos
 
@@ -46,8 +45,9 @@ Librerias y herramientas:
 
     git clone [https://github.com/LuzTappero/Challenge-final-bot]
 
-2. Creación de un entorno virtual con python
+2. Acceder al repositorio y crear un entorno virtual con python con el siguiente comando
 
+    cd tu-directorio
     python venv -m venv
 
 3. Instalación de dependencias
@@ -60,8 +60,9 @@ Librerias y herramientas:
 
 5. Configuración de Chroma db(config/chromadb_config)
 
-    Crear un directorio local para almacenamiento de la información
+    Crear un directorio local para almacenamiento de la información y detallarlo en el archivo chromadb_config.py en la carpeta config.
     Asignar un nombre a la colección.
+
 
 6.  Ejecución única de funciones para la creación de embeddings y almacenamiento en la base de datos vectorial
     La ejecución de estas funciones se realiza mediante la función process_file(file_path), ubicada en la carpeta 'utils'. Esta función toma como parámetro la ruta (file_path) de los archivos a procesar (ubicados en la carpeta outout) y ejecuta los siguientes funciones:
@@ -79,7 +80,9 @@ Librerias y herramientas:
         Mensaje de salida
         "Documents added to Chroma with IDs: {ids} and embeddings: {len(embeddings)} embedding info {embeddings[0]}"
 
-7. Una vez que ya está todo instalado y los embeddings creados se puede proceder a interactuar con la API a través de herramientas como POSTMAN. (ver [EndPoints](#endpoints))
+7. Una vez que ya está todo instalado, los embeddings creados y almacenado se puede proceder a interactuar con la API a través de herramientas como:
+    -  POSTMAN (ver [EndPoints](#endpoints))
+    - Interacción a través de la interfaz gráfica (ver[Descripción de Frontend](#descripción))
 
 
 ## Herramientas utilizadas
@@ -91,7 +94,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
     - Razón de elección: pdfplumber fue seleccionado por su capacidad robusta para manejar documentos PDF complejos, permitiendo extraer texto incluso de estructuras avanzadas como tablas, encabezados y pies de página.
     - Beneficio clave: La herramienta sobresale en el procesamiento de PDFs que contienen múltiples formatos de texto y diseño, lo que garantiza que el contenido del prospecto médico se extraiga con precisión sin pérdida de información relevante.
 
-2. LangChain Recursive Text Splitter
+2. LangChainRecursiveTextSplitter
 
 - Razón de elección:
     Herramienta para generación de chunks.
@@ -141,7 +144,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 
       - base_retriever: Realiza la búsqueda inicial en el vector store utilizando el método .as_retriever().
       - base_compressor: Aplica el modelo de reranking de Cohere configurado para reorganizar y asignar relevancia a los resultados obtenidos.
-      - compression_threshold: Filtra los documentos eliminando aquellos con un puntaje de relevancia inferior a 0.5, garantizando que solo los documentos más relevantes sean considerados.
+      - compression_threshold: Filtra los documentos eliminando aquellos con un puntaje de relevancia inferior a 0.6, garantizando que solo los documentos más relevantes sean considerados.
 
 * Método invoke para la ejecución de la consulta:
 
@@ -157,7 +160,7 @@ Este proyecto se desarrolló con una seria de herramientas y configuraciones par
 
 1. Uso de ChatCohere
 - Razón de elección:
-    Se ha optado por el modelo ChatCohere debido a su capacidad avanzada de procesamiento de lenguaje natural, especialmente en tareas de generación de respuestas conversacionales. El modelo command-r-plus-08-2024 de Cohere es ideal para generar respuestas coherentes y relevantes en entornos interactivos, proporcionando respuestas precisas basadas en la consulta del usuario.
+    Se ha optado por la clase de ChatCohere debido a su capacidad avanzada de procesamiento de lenguaje natural, especialmente en tareas de generación de respuestas conversacionales. El modelo command-r-plus-08-2024 de Cohere es ideal para generar respuestas coherentes y relevantes en entornos interactivos, proporcionando respuestas precisas basadas en la consulta del usuario.
 - Beneficio clave:
     Precisión en la respuesta: El modelo está optimizado para generar respuestas altamente contextualizadas, utilizando texto relevante extraído de la base de datos.
     Configuración flexible: Ajustar parámetros como temperature=0.0 permite que el modelo adopte una actitud más determinista y genere respuestas precisas y coherentes en cada interacción.
@@ -210,7 +213,7 @@ query (string): Una cadena de texto que contiene la pregunta o consulta que el u
 Flujo:
 1. El usuario envía una solicitud POST con el parámetro query al endpoint /ask_question.
 2. El servidor invoca la función orquestadora, que maneja la consulta y obtiene la información relevante.
-3. La función orquestadora pasa la query a la base de datos, realiza el proceso de búsqueda, recuperación, re-ranking y finalmente genera una respuesta.
+3. La función orquestadora envía la query a la base de datos, realiza el proceso de búsqueda, recuperación, re-ranking y finalmente genera una respuesta.
 4. La respuesta se devuelve al usuario en el formato { "final_response": response }.
 
 POST /ask_question
@@ -242,14 +245,14 @@ Errores comunes
 
     {
         "status": 404,
-        "message": "Lo siento, no encontré información relevante en la base de datos para   responder tu consulta."
+        "message": "Lo siento, no tengo información relevante para responder tu consulta.""
     }
 
 3. Internal Server Error:
 
     - Descripción: Ocurrió un error inesperado en el servidor al procesar la solicitud.
     - Causa: Puede ser un error en la configuración de la base de datos, un problema con el modelo o un error en el código del servidor.
-    - Solución: Realizar prints en diferentes flujos del código para encontrar el error.
+    - Solución: Realizar prints en diferentes flujos del código para encontrar el error e intentar la ejecución nuevamente.
 
     {
         "detail": "An unexpected error occurred. Please try again later."
@@ -257,7 +260,22 @@ Errores comunes
 
 
 ## Ejemplos de uso
-A continuación se detallan algunos de las pruebas realizadas, las mismas fueron realizadas a través de la interfaz gráfica realizada con REACT.Js-
+A continuación se detallan algunos de las pruebas realizadas, las mismas fueron realizadas a través de la interfaz gráfica realizada con REACT.Js
+En el caso de prueba con un entorno como postman, tanto la query debe ser ingresada en formato JSON.
+
+Ejemplo con formato JSON
+- Entrada:
+        {
+            "query":"¿Qué es el medicamento Aclusin?"
+        }
+
+- Response
+        {
+            "final_response": "El medicamento Aclusin es un fármaco que contiene el principio activo cilostazol. Está indicado para el tratamiento de los síntomas isquémicos de los miembros, como úlceras, dolor, claudicación intermitente y sensación de frío, causados por la enfermedad arterial oclusiva crónica.
+            Su mecanismo de acción se basa en la inhibición de la enzima fosfodiesterasa tipo III de AMP cíclico (AMPc PDE tipo III), lo que resulta en una mayor concentración de AMPc en el músculo liso vascular y en las plaquetas, produciendo un efecto vasodilatador y antiagregante plaquetario."
+        }
+
+
 ----------------------------------------------------------------------------------
 ### Ejemplo de prueba 1
 
@@ -388,7 +406,7 @@ Este servidor frontend se comunica con la API del backend para generar respuesta
 
  - Clona el repositorio del frontend: Clona el repositorio del frontend usando Git. Abre una terminal y ejecuta el siguiente comando:
 
-    git clone <URL_DEL_REPOSITORIO>
+    git clone <https://github.com/LuzTappero/MEDICABOT-Frontend.git>
 
 
  - Navegar al directorio del proyecto:
@@ -400,7 +418,6 @@ Este servidor frontend se comunica con la API del backend para generar respuesta
     - Instalar las dependencias: Instala las dependencias necesarias para el proyecto ejecutando el siguiente comando:
 
         npm install
-
 
     - Ejecutar el servidor de desarrollo: Para iniciar el servidor de desarrollo, ejecuta el siguiente comando:
 
@@ -417,3 +434,7 @@ Cuando el servidor se haya iniciado correctamente, verás un mensaje similar al 
     ➜  press h + enter to show help
 
 
+## Herramientas utilizadas
+
+* Axios para establecer la comunicación con el backend, enviando la query y obtener la respuesta.
+* Marked: biblioteca de JavaScript ligera y de alto rendimiento que permite analizar y convertir texto en formato Markdown a HTML. Es ampliamente utilizada en aplicaciones web para mostrar contenido formateado recibido de un backend o escrito por el usuario. Esto permite devolverle al usuario un texto amigable con presencia de items, palabras importantes en "negrita" segun el formato MD que viene desde el backend.

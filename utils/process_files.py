@@ -23,6 +23,5 @@ def process_file(file_path: str) -> None:
 
 
 # Example usage
-
 # file_path = './output/CARDILIPEN-Bisoprolol fumarato.txt'
 # process_file(file_path)

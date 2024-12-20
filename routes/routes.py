@@ -8,14 +8,13 @@ router= APIRouter()
 async def ask(query: Query):
     """
     Endpoint to handle query requests and generate a response.
-
     Parameters:
     - query (Query): The query object containing the user's query string.
-
     Returns:
     - str: The generated response from the language model.
     """
     try:
+        # Check if the query parameter is present and valid                                                 
         query_text = query.query
         if not query_text or not isinstance(query_text, str):
             raise HTTPException(status_code=400, detail="Query parameter is missing or invalid.")

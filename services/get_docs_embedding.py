@@ -7,13 +7,10 @@ co= cohere_config()
 def get_embedding(chunks):
     """
     Create embeddings for the chunks.
-
     Parameters:
     chunks(list): A list of chunks to create embeddings for.
-
     Returns:
     list: A list of floats representing the embeddings for the chunks.
-
     Raises:
     If an error occurs while creating embeddings.
     """
@@ -29,7 +26,6 @@ def get_embedding(chunks):
                 continue
             chunk_text = chunk["chunk_text"]
             chunk_id = chunk["chunk_id"]
-
             # Generate embeddings for the chunk
             embedding_response = co.embed(
                 texts=[chunk_text],
@@ -41,11 +37,9 @@ def get_embedding(chunks):
             if not embedding_response or not hasattr(embedding_response, 'embeddings') or not  embedding_response.embeddings:
                 print(f"No embeddings were returned for chunk {chunk_id}.")
                 continue
-
             embeddings = embedding_response.embeddings.float_
             # Add embeddings to the list
             all_embeddings.append((chunk_id, embeddings))
-
         # Add embeddings to Chroma db (vector store)
         add_embeddings_to_chroma(all_embeddings, chunks)
     except TooManyRequestsError as e:

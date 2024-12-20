@@ -1,5 +1,6 @@
 from fastapi.middleware.cors import CORSMiddleware
 
+#CORS config for communicating with frontend
 def cors_config(app):
     app.add_middleware(
         CORSMiddleware,
